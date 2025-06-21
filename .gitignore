@@ -1,0 +1,39 @@
+# Pastas de build e cache
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+MemoryCaptures/
+.collab/
+
+# VS Code e IDEs
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+
+# Outros arquivos desnecessários
+*.apk
+*.aab
+*.bak
+.DS_Store
+
+# Plugins Rider
+Assets/Plugins/Editor/JetBrains*
+
+# Meta files (somente mantenha se o asset for incluído)
+!/[Aa]ssets/**/*.meta
+!/[Pp]rojectSettings/**/*.meta
+!/[Pp]ackages/**/*.meta
