@@ -4,24 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private CharacterMovement movement;
+    private CharacterJump jump;
 
-    public float speed;
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-
+        movement = GetComponent<CharacterMovement>();
+        jump = GetComponent<CharacterJump>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-    }
-
-    void Move()
-    {
-        Vector3
+        movement.Move(Input.GetAxis("Horizontal"));
+        if (Input.GetButtonDown("Jump")) jump.TryJump();
     }
 }

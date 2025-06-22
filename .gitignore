@@ -6,6 +6,7 @@
 [Bb]uilds/
 [Ll]ogs/
 MemoryCaptures/
+UserSettings/
 .collab/
 
 # VS Code e IDEs
@@ -29,11 +30,16 @@ MemoryCaptures/
 *.aab
 *.bak
 .DS_Store
+*.uo
+*.orig
+*.coverage
+*.coverageinfo
+*.profdata
 
 # Plugins Rider
 Assets/Plugins/Editor/JetBrains*
 
-# Meta files (somente mantenha se o asset for incluído)
+# Meta files (mantenha os dos arquivos versionados)
 !/[Aa]ssets/**/*.meta
 !/[Pp]rojectSettings/**/*.meta
 !/[Pp]ackages/**/*.meta
