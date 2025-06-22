@@ -5,15 +5,8 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] protected float moveSpeed = 5f;
 
-    protected Rigidbody2D characterRigidbody;
-
-    protected virtual void Awake()
+    public virtual void Move(float direction, Rigidbody2D characterRig)
     {
-        characterRigidbody = GetComponent<Rigidbody2D>();
-    }
-
-    public virtual void Move(float direction)
-    {
-        characterRigidbody.velocity = new Vector2(direction * moveSpeed, characterRigidbody.velocity.y);
+        characterRig.velocity = new Vector2(direction * moveSpeed, characterRig.velocity.y);
     }
 }
