@@ -9493,6 +9493,9 @@ GameObject:
   - component: {fileID: 1983503796}
   - component: {fileID: 1983503795}
   - component: {fileID: 1983503794}
+  - component: {fileID: 1983503799}
+  - component: {fileID: 1983503798}
+  - component: {fileID: 1983503797}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -9652,7 +9655,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpImpulse: 5
-  hasDoubleJump: 0
+  hasDoubleJump: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  jumpCount: 0
 --- !u!114 &1983503795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9676,6 +9683,51 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60640fd379b689e408de9de5b75a71ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1983503797
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983503788}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ffaa790eb0d682e4189395cea24b3836, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1983503798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983503788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a29608c1f037bd4f973ad66be6041b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1983503799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983503788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abeb5d173db5b954a9d8e7f73e9a9e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2048789840

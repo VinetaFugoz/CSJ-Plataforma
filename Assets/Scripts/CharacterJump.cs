@@ -1,42 +1,52 @@
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterJump : MonoBehaviour
 {
+    [Header("Jump Settings")]
     [SerializeField] protected float jumpImpulse = 5f;
-    [SerializeField] protected bool hasDoubleJump = false;
+    private int maxJumps = 1;
+    [SerializeField] protected bool _hasDoubleJump = false;
+    public bool HasDoubleJump
+    {
+        get => _hasDoubleJump;
+        set
+        {
+            _hasDoubleJump = value;
+            maxJumps = value ? 2 : 1;
+        }
+    }
     [SerializeField] private LayerMask groundLayer;
-    protected int jumpCount = 0;
-    protected int maxJumps = 1;
+    public int jumpCount = 0;
+    
 
-    protected virtual void Start() => maxJumps = hasDoubleJump ? 2 : 1;
-
-    public virtual void HandleJump(Rigidbody2D characterRig)
+    public virtual void Jump(Rigidbody2D characterRig)
     {
         if (!CanJump()) return;
-        Jump(characterRig);
-        jumpCount++;
+        ApplyJumpForce(characterRig);
+        IncrementJumpCount();
     }
-
-    private void Jump(Rigidbody2D characterRig) => characterRig.AddForce(Vector2.up * jumpImpulse, ForceMode2D.Impulse);
 
     protected bool CanJump() => jumpCount < maxJumps;
 
+    private void ApplyJumpForce(Rigidbody2D characterRig)
+    {
+        characterRig.AddForce(Vector2.up * jumpImpulse, ForceMode2D.Impulse);
+    }
+
+    private void IncrementJumpCount() => jumpCount++;
+
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (IsGroundCollision(collision))
-            jumpCount = 0;
+        if (HasGroundCollision(collision)) ResetJumpCount();
     }
 
-    protected bool IsGroundCollision(Collision2D collision)
-    {
-        if (collision.gameObject.layer != groundLayer)
-            return false;
+    private void ResetJumpCount() => jumpCount = 0;
 
-        foreach (var contact in collision.contacts)
-            if (contact.normal.y > 0.5f)
-                return true;
+    private bool HasGroundCollision(Collision2D collision) => IsOnGroundLayer(collision) && HasContactBelow(collision);
 
-        return false;
-    }
+    private bool IsOnGroundLayer(Collision2D collision) => (groundLayer.value & (1 << collision.gameObject.layer)) != 0;
+
+    private bool HasContactBelow(Collision2D collision) => collision.contacts.Any(contact => contact.normal.y > 0.5f);
 }
