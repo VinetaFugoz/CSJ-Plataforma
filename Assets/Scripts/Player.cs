@@ -31,6 +31,6 @@ public class Player : MonoBehaviour
 
         if (hasJumpInput) characterJump.Jump(characterRig);
 
-        characterAnimation.UpdateState(characterRig, characterJump.jumpCount, horizontalInput);
+        characterAnimation.UpdateAnimation(characterRig, characterJump.jumpCount, horizontalInput);
     }
 }

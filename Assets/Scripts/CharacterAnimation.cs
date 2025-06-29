@@ -1,27 +1,42 @@
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class CharacterAnimation : MonoBehaviour
 {
+    [Header("Animation Thresholds")]
+    [SerializeField] private float fallThreshold = -0.1f;
+    [SerializeField] private float movementThreshold = 0.01f;
+
+    private const String PLAYER_STATE_PARAM = "playerState";
+
     private Animator characterAnimator;
-    private const string STATE_PARAM = "characterState";
+    
+    // Cache para performance
+    private static readonly int STATE_PARAM = Animator.StringToHash(PLAYER_STATE_PARAM);
 
-    private void Awake() => characterAnimator = GetComponent<Animator>();
-
-    public void UpdateState(Rigidbody2D rig, int jumpCount, float horizontal)
+    private void Awake()
     {
+        characterAnimator = GetComponent<Animator>();
+    }
+
+    public void UpdateAnimation(Rigidbody2D rig, int jumpCount, float horizontal)
+    {
+        if (rig == null || characterAnimator == null) return;
+
         CharacterState state = GetCharacterState(rig, jumpCount, horizontal);
-        characterAnimator.SetInteger(STATE_PARAM, (int)state);
+        characterAnimator.SetInteger(STATE_PARAM, (int) state);
     }
 
     private CharacterState GetCharacterState(Rigidbody2D rig, int jumpCount, float horizontal)
     {
-        if (rig.velocity.y < -0.1f) return CharacterState.Falling;
+        if (rig.velocity.y < fallThreshold) return CharacterState.Falling;
 
-        switch (jumpCount)
+        return jumpCount switch
         {
-            case 2: return CharacterState.DoubleJumping;
-            case 1: return CharacterState.Jumping;
-            default: return Mathf.Abs(horizontal) > 0.01f ? CharacterState.Walking : CharacterState.Idle;
-        }
+            2 => CharacterState.DoubleJumping,
+            1 => CharacterState.Jumping,
+            _ => Mathf.Abs(horizontal) > movementThreshold ? CharacterState.Walking : CharacterState.Idle,
+        };
     }
-}
+} 
